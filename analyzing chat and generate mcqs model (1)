@@ -1,0 +1,225 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "c4a40eeb-ea4b-41eb-adf3-14c257493c9e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Requirement already satisfied: transformers in c:\\users\\saikr\\anaconda3\\lib\\site-packages (4.45.2)\n",
+      "Requirement already satisfied: filelock in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (3.13.1)\n",
+      "Requirement already satisfied: huggingface-hub<1.0,>=0.23.2 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (0.26.1)\n",
+      "Requirement already satisfied: numpy>=1.17 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (1.26.4)\n",
+      "Requirement already satisfied: packaging>=20.0 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (23.2)\n",
+      "Requirement already satisfied: pyyaml>=5.1 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (6.0.1)\n",
+      "Requirement already satisfied: regex!=2019.12.17 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (2023.10.3)\n",
+      "Requirement already satisfied: requests in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (2.32.2)\n",
+      "Requirement already satisfied: safetensors>=0.4.1 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (0.4.5)\n",
+      "Requirement already satisfied: tokenizers<0.21,>=0.20 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (0.20.1)\n",
+      "Requirement already satisfied: tqdm>=4.27 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from transformers) (4.66.4)\n",
+      "Requirement already satisfied: fsspec>=2023.5.0 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from huggingface-hub<1.0,>=0.23.2->transformers) (2024.3.1)\n",
+      "Requirement already satisfied: typing-extensions>=3.7.4.3 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from huggingface-hub<1.0,>=0.23.2->transformers) (4.11.0)\n",
+      "Requirement already satisfied: colorama in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from tqdm>=4.27->transformers) (0.4.6)\n",
+      "Requirement already satisfied: charset-normalizer<4,>=2 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from requests->transformers) (2.0.4)\n",
+      "Requirement already satisfied: idna<4,>=2.5 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from requests->transformers) (3.7)\n",
+      "Requirement already satisfied: urllib3<3,>=1.21.1 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from requests->transformers) (2.2.2)\n",
+      "Requirement already satisfied: certifi>=2017.4.17 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from requests->transformers) (2024.8.30)\n",
+      "Requirement already satisfied: torch in c:\\users\\saikr\\anaconda3\\lib\\site-packages (2.5.0)\n",
+      "Requirement already satisfied: filelock in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from torch) (3.13.1)\n",
+      "Requirement already satisfied: typing-extensions>=4.8.0 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from torch) (4.11.0)\n",
+      "Requirement already satisfied: networkx in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from torch) (3.2.1)\n",
+      "Requirement already satisfied: jinja2 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from torch) (3.1.4)\n",
+      "Requirement already satisfied: fsspec in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from torch) (2024.3.1)\n",
+      "Requirement already satisfied: setuptools in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from torch) (69.5.1)\n",
+      "Requirement already satisfied: sympy==1.13.1 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from torch) (1.13.1)\n",
+      "Requirement already satisfied: mpmath<1.4,>=1.1.0 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from sympy==1.13.1->torch) (1.3.0)\n",
+      "Requirement already satisfied: MarkupSafe>=2.0 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from jinja2->torch) (2.1.3)\n",
+      "Requirement already satisfied: nltk in c:\\users\\saikr\\anaconda3\\lib\\site-packages (3.8.1)\n",
+      "Requirement already satisfied: click in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from nltk) (8.1.7)\n",
+      "Requirement already satisfied: joblib in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from nltk) (1.4.2)\n",
+      "Requirement already satisfied: regex>=2021.8.3 in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from nltk) (2023.10.3)\n",
+      "Requirement already satisfied: tqdm in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from nltk) (4.66.4)\n",
+      "Requirement already satisfied: colorama in c:\\users\\saikr\\anaconda3\\lib\\site-packages (from click->nltk) (0.4.6)\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install transformers\n",
+    "!pip install torch\n",
+    "!pip install nltk"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "c69add71-4f46-41ad-b940-58dfd082b2a3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import nltk\n",
+    "from nltk.corpus import stopwords\n",
+    "\n",
+    "\n",
+    "try:\n",
+    "    stop_words = set(stopwords.words('english'))\n",
+    "except LookupError:\n",
+    "    nltk.download('stopwords')\n",
+    "    stop_words = set(stopwords.words('english'))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "f93619cd-2981-4051-a9f5-ce84dcda96c2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from transformers import GPT2LMHeadModel, GPT2Tokenizer\n",
+    "\n",
+    "\n",
+    "tokenizer = GPT2Tokenizer.from_pretrained('gpt2')\n",
+    "model = GPT2LMHeadModel.from_pretrained('gpt2')\n",
+    "\n",
+    "def generate_text(prompt, max_length=150):\n",
+    "    inputs = tokenizer.encode(prompt, return_tensors='pt')\n",
+    "    outputs = model.generate(inputs, max_length=max_length, num_return_sequences=1)\n",
+    "    return tokenizer.decode(outputs[0], skip_special_tokens=True)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "8b7341d7-0025-43fa-98bb-5b8b9ea8d35b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import random\n",
+    "\n",
+    "def generate_mcq(chat_history):\n",
+    "    \n",
+    "    context = preprocess_chat(chat_history)\n",
+    "    \n",
+    "    \n",
+    "    prompt = f\"Generate a multiple-choice question from the following context: {context}\\nQuestion:\"\n",
+    "    \n",
+    "    question = generate_text(prompt, max_length=50)\n",
+    "    \n",
+    "    \n",
+    "    correct_prompt = f\"Generate the correct answer for the question: {question}\\nAnswer:\"\n",
+    "    correct_answer = generate_text(correct_prompt, max_length=20)\n",
+    "    \n",
+    "    \n",
+    "    distractors = []\n",
+    "    for i in range(3):\n",
+    "        distractor_prompt = f\"Generate a plausible but incorrect answer for the question: {question}\\nIncorrect answer:\"\n",
+    "        distractors.append(generate_text(distractor_prompt, max_length=20))\n",
+    "    \n",
+    "    return {\n",
+    "        \"question\": question.strip(),\n",
+    "        \"correct_answer\": correct_answer.strip(),\n",
+    "        \"distractors\": [d.strip() for d in distractors]\n",
+    "    }\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "39f4f93e-2390-4e41-8e4c-fd753772a95d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def generate_article(chat_history):\n",
+    "   \n",
+    "    context = preprocess_chat(chat_history)\n",
+    "    \n",
+    "    \n",
+    "    prompt = f\"Generate a concise 200-300 word article from the following conversation: {context}\\nArticle:\"\n",
+    "    \n",
+    "    \n",
+    "    article = generate_text(prompt, max_length=300)\n",
+    "    \n",
+    "    return article.strip()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b6218241-11f2-484f-b3eb-13cf892a212a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Enter the chat history (type 'done' when finished):\n"
+     ]
+    }
+   ],
+   "source": [
+    "def main():\n",
+    "    \n",
+    "    print(\"Enter the chat history (type 'done' when finished):\")\n",
+    "    chat_history = []\n",
+    "    \n",
+    "    while True:\n",
+    "        line = input()\n",
+    "        if line.lower() == 'done':\n",
+    "            break\n",
+    "        chat_history.append(line)\n",
+    "    \n",
+    "    if not chat_history:\n",
+    "        print(\"No chat history provided. Exiting...\")\n",
+    "        return\n",
+    "    \n",
+    "    \n",
+    "    mcq = generate_mcq(chat_history)\n",
+    "    print(\"\\nMultiple Choice Question:\")\n",
+    "    print(mcq[\"question\"])\n",
+    "    print(f\"A) {mcq['correct_answer']}\")\n",
+    "    for i, distractor in enumerate(mcq['distractors'], start=1):\n",
+    "        print(f\"{chr(65+i)}) {distractor}\")\n",
+    "    \n",
+    "    \n",
+    "    article = generate_article(chat_history)\n",
+    "    print(\"\\nGenerated Article:\")\n",
+    "    print(article)\n",
+    "\n",
+    "if __name__ == \"__main__\":\n",
+    "    main()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "df3fb355-3f28-499e-af5b-c62dd74120d8",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
